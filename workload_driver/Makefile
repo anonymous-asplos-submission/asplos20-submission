@@ -1,12 +1,10 @@
-all: data_store simple
+all: data_store
 
 data_store: data_store.c
 	gcc -Bstatic -I../../pmdk/src/examples/libpmemobj/map/ -I../../pmdk/src/examples/libpmemobj/hashmap/ -I../../pmdk/src/examples/ -I../../pmdk/src/include/ -I ../../pmrace/include data_store.c ../../pmrace/src/pmrace_interface.c ../../pmdk/src/examples/libpmemobj/map/libmap.a ../../pmdk/src/debug/libpmemobj.a ../../pmdk/src/debug/libpmem.a -lndctl -ldaxctl -lpthread -ldl -o data_store
 
-simple: simple.c
-	gcc -g3 -Bstatic -I../../pmdk/src/include/ -I ../../pmrace/include simple.c ../../pmrace/src/pmrace_interface.c ../../pmdk/src/debug/libpmemobj.a ../../pmdk/src/debug/libpmem.a -ldl -lndctl -ldaxctl -lpthread -o simple
 clean:
-	rm data_store simple
+	rm data_store
 
 
 
