@@ -9,3 +9,7 @@ The project was originally named as PMRace, and now renamed as XFDetector. There
 -Linux 18.04 
 
 ## Usage
+
+To run the test, run the script in the pmrace directory.
+For example, run "pmrace/runHashMapTx.sh" to run hashmap_tx workload test.
+
