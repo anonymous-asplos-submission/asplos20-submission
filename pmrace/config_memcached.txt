@@ -1,0 +1,5 @@
+PINTOOL_PATH /home/wiper_nvdimm/pmrace/pintool/obj-intel64/pintool.so
+EXEC_PATH /home/wiper_nvdimm/memcached-pmem/memcached
+PM_IMAGE /mnt/pmem0/pool
+PRE_FAILURE_COMMAND /home/wiper_nvdimm/memcached-pmem/memcached -A -m 0 -o pslab_file=/mnt/pmem0/pool,pslab_force
+POST_FAILURE_COMMAND /home/wiper_nvdimm/memcached-pmem/memcached -m 0 -o pslab_file=/mnt/pmem0/pool,pslab_force,pslab_recover -p 11212

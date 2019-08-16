@@ -1,0 +1,5 @@
+PINTOOL_PATH /home/wiper_nvdimm/pmrace/pintool/obj-intel64/pintool.so
+EXEC_PATH /home/wiper_nvdimm/workloads/hashmap/simple
+PM_IMAGE /mnt/pmem0/simple
+PRE_FAILURE_COMMAND /home/wiper_nvdimm/workloads/hashmap/simple /mnt/pmem0/simple
+POST_FAILURE_COMMAND /home/wiper_nvdimm/workloads/hashmap/simple /mnt/pmem0/simple

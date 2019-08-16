@@ -1,0 +1,5 @@
+PINTOOL_PATH /home/wiper_nvdimm/pmrace/pintool/obj-intel64/pintool.so
+EXEC_PATH /home/wiper_nvdimm/redis-nvml/src/redis-server
+PM_IMAGE /mnt/pmem0/redis.pm
+PRE_FAILURE_COMMAND /home/wiper_nvdimm/redis-nvml/src/redis-server /home/wiper_nvdimm/redis-nvml/redis.conf pmfile /mnt/pmem0/redis.pm 8mb
+POST_FAILURE_COMMAND /home/wiper_nvdimm/redis-nvml/src/redis-server /home/wiper_nvdimm/redis-nvml/redis.conf pmfile /mnt/pmem0/redis.pm 8mb --port 6380
