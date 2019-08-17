@@ -103,6 +103,8 @@ create_entry(PMEMobjpool *pop, void *ptr, void *arg)
 
 	memset(&e->list, 0, sizeof(e->list));
 
+	// BUG: double persist
+	pmemobj_persist(pop, e, sizeof(*e));
 	pmemobj_persist(pop, e, sizeof(*e));
 
 	return 0;
@@ -119,8 +121,7 @@ create_buckets(PMEMobjpool *pop, void *ptr, void *arg)
 	b->nbuckets = *((size_t *)arg);
 	pmemobj_memset_persist(pop, &b->bucket, 0,
 			b->nbuckets * sizeof(b->bucket[0]));
-	// BUG: missing persist
-	// pmemobj_persist(pop, &b->nbuckets, sizeof(b->nbuckets));
+	pmemobj_persist(pop, &b->nbuckets, sizeof(b->nbuckets));
 
 	return 0;
 }

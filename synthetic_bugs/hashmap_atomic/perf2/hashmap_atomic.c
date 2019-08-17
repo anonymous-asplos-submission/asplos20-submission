@@ -142,6 +142,9 @@ create_hashmap(PMEMobjpool *pop, TOID(struct hashmap_atomic) hashmap,
 	size_t len = INIT_BUCKETS_NUM;
 	size_t sz = sizeof(struct buckets) +
 			len * sizeof(struct entries_head);
+	
+	// BUG: persist clean data
+	pmemobj_persist(pop, D_RW(hashmap), sizeof(*D_RW(hashmap)));
 
 	if (POBJ_ALLOC(pop, &D_RW(hashmap)->buckets, struct buckets, sz,
 			create_buckets, &len)) {
@@ -198,10 +201,8 @@ hm_atomic_rebuild_finish(PMEMobjpool *pop, TOID(struct hashmap_atomic) hashmap)
 	POBJ_FREE(&D_RO(hashmap)->buckets);
 
 	D_RW(hashmap)->buckets = D_RO(hashmap)->buckets_tmp;
-
-	// BUG: missing persist
-	// pmemobj_persist(pop, &D_RW(hashmap)->buckets,
-	// 		sizeof(D_RW(hashmap)->buckets));
+	pmemobj_persist(pop, &D_RW(hashmap)->buckets,
+			sizeof(D_RW(hashmap)->buckets));
 
 	/*
 	 * We have to set offset manually instead of substituting OID_NULL,
